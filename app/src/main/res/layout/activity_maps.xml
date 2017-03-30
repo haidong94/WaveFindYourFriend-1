@@ -7,12 +7,19 @@
     tools:context="vinsoft.com.wavefindyourfriend.activity.WelcomActivity">
 
     <TextView
-        android:textAlignment="center"
-        android:textColor="@color/balck"
-        android:textSize="@dimen/txt_size_default"
         android:id="@+id/tv_name_location"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:background="#E8E8E8"
+        android:textAlignment="center"
+        android:textColor="@color/balck"
+        android:textSize="@dimen/txt_size_default" />
+
+    <fragment
+        android:id="@+id/place_autocomplete_fragment"
+        android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:map="http://schemas.android.com/apk/res-auto"
@@ -23,5 +30,11 @@
         android:layout_height="match_parent"
         tools:context="vinsoft.com.wavefindyourfriend.activity.MapsActivity">
 
+        <Spinner
+            android:id="@+id/spn_transport_mode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|bottom"
+            android:background="@color/white"></Spinner>
     </fragment>
 </LinearLayout>

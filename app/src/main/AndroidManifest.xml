@@ -33,6 +33,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
+            android:configChanges="screenSize|orientation|screenLayout"
             android:name=".activity.MapsActivity"
             android:label="@string/title_activity_maps">
             <intent-filter>

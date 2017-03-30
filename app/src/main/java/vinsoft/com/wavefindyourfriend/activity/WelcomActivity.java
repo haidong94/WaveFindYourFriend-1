@@ -47,7 +47,7 @@ public class WelcomActivity extends AppCompatActivity {
             if (checkSelfPermission(Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED
                     | checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
-                //Permisson don't granted
+            /*    //Permisson don't granted
                 if (shouldShowRequestPermissionRationale(
                         Manifest.permission.READ_EXTERNAL_STORAGE)) {
                     //Toast.makeText(WelcomActivity.this, "Permission isn't granted ", Toast.LENGTH_SHORT).show();
@@ -55,7 +55,7 @@ public class WelcomActivity extends AppCompatActivity {
                 // Permisson don't granted and dont show dialog again.
                 else {
                     //Toast.makeText(WelcomActivity.this, "Permisson don't granted and dont show dialog again ", Toast.LENGTH_SHORT).show();
-                }
+                }*/
                 //Register permission
                 requestPermissions(new String[]{Manifest.permission.READ_CONTACTS,Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
 
