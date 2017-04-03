@@ -1,0 +1,64 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:focusableInTouchMode="true"
+    android:descendantFocusability="beforeDescendants"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="20dp"
+        android:paddingBottom="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="5dp">
+
+        <LinearLayout
+            android:layout_alignParentBottom="true"
+            android:id="@+id/ll_input_content"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:maxHeight="240dp"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:background="@null"
+                android:theme="@style/MyEditTextTheme"
+                android:textSize="@dimen/txt_big"
+                android:textColor="@android:color/primary_text_light"
+                android:id="@+id/edt_message_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/btn_chat_send"
+                android:hint="Input a message" />
+            <ImageView
+                android:layout_gravity="center"
+                android:layout_weight="8"
+                android:id="@+id/img_chat_send"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_action_name"
+                android:textColor="@android:color/primary_text_light"
+                android:layout_below="@+id/rlv_messages_container" />
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+
+            android:id="@+id/rlv_messages_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentTop="false"
+            android:layout_marginBottom="18dp"
+            android:layout_above="@+id/ll_input_content"
+            android:listSelector="@android:color/transparent"
+            android:transcriptMode="alwaysScroll"
+            android:divider="@null" />
+
+    </RelativeLayout>
+</LinearLayout>

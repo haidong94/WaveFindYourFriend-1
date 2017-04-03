@@ -50,6 +50,7 @@ import java.util.List;
 import java.util.Locale;
 
 import vinsoft.com.wavefindyourfriend.R;
+import vinsoft.com.wavefindyourfriend.untils.MethodUntil;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, LocationListener {
 
@@ -283,7 +284,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 polylineList.clear();
             }
 
-            GoogleDirection.withServerKey("AIzaSyC6rjR9162M_uRoV7CH5z0o113CG-9HTcI")
+            GoogleDirection.withServerKey(String.valueOf(R.string.google_maps_key))
                     .from(markerList.get(0).getPosition())
                     .to(markerList.get(1).getPosition())
                     .transportMode(transportMode)
@@ -355,11 +356,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (requestCode == 1) {
             if (grantResults.length == 2 &&
                     grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(MapsActivity.this, "Permisions is Granted", Toast.LENGTH_SHORT).show();
+                MethodUntil.makeToast(MapsActivity.this, String.valueOf(R.string.txt_permission_grant),0);
             } else {
 
-                Toast.makeText(MapsActivity.this, "Permisions is Denied. Grant it now!", Toast.LENGTH_LONG).show();
-
+                MethodUntil.makeToast(MapsActivity.this, String.valueOf(R.string.txt_permission_deny),0);
             }
         } else {
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);

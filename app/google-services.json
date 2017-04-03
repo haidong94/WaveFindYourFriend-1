@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "418042358383",
+    "firebase_url": "https://wavefindyourfriend-ea3f2.firebaseio.com",
+    "project_id": "wavefindyourfriend-ea3f2",
+    "storage_bucket": "wavefindyourfriend-ea3f2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:418042358383:android:dde54b8e6944f17c",
+        "android_client_info": {
+          "package_name": "vinsoft.com.wavefindyourfriend"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "418042358383-0urmmaskei0c047c4lo087if46vhh9eb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "vinsoft.com.wavefindyourfriend",
+            "certificate_hash": "fbb6a403abe95376427ff8e5418b4afd3ea405b9"
+          }
+        },
+        {
+          "client_id": "418042358383-klme6i9h9tplfgo1rgpia825sbfhbmtq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnDUteXZKAh-fXYjTI1E01sUTvgAHCCEo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "418042358383-klme6i9h9tplfgo1rgpia825sbfhbmtq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

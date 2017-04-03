@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item>
+        <shape>
+            <gradient android:startColor="@color/colorPrimaryDark"
+                android:endColor="@color/colorPrimaryDark"/>
+            <corners android:radius="4dp"/><!-- Thiết lập góc cạnh của nút -->
+            <stroke android:color="@color/colorPrimaryDark"/>
+        </shape>
+    </item>
+
+    <item android:state_focused="true" android:state_enabled="true">
+        <shape>
+            <gradient android:startColor="@color/colorPrimaryDark"
+                android:endColor="@color/colorPrimaryDark"/>
+            <corners android:radius="4dp"/><!-- Thiết lập góc cạnh của nút -->
+            <stroke android:color="@color/colorPrimaryDark"/>>
+        </shape>
+    </item>
+
+    <item android:state_pressed="true" android:state_enabled="true">
+        <shape>
+            <gradient android:startColor="#F8F8FF"
+                android:endColor="#F8F8FF"/>
+            <corners android:radius="4dp"/><!-- Thiết lập góc cạnh của nút -->
+            <stroke android:color="#F8F8FF"/>
+        </shape>
+    </item>
+
+    <item  android:state_focused="true" android:state_enabled="true">
+        <shape>
+            <gradient android:startColor="#F8F8FF"
+                android:endColor="#F8F8FF"/>
+            <corners android:radius="4dp"/><!-- Thiết lập góc cạnh của nút -->
+            <stroke android:color="#F8F8FF"/>
+        </shape>
+    </item>
+</selector>

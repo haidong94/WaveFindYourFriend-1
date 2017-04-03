@@ -12,4 +12,10 @@
     <string name="txt_sign_in">Sign in</string>
     <string name="title_activity_maps">Map</string>
     <string name="txt_error_network_gps">No Internet Or GPS Service Provider Available</string>
+    <string name="txt_copy">Copy</string>
+    <string name="txt_delete">Delete</string>
+    <string name="google_maps_key">AIzaSyC6rjR9162M_uRoV7CH5z0o113CG-9HTcI</string>
+    <string name="txt_permission_grant">Permisions is Granted</string>
+    <string name="txt_permission_deny">Permisions is Denied. Grant it now!</string>
+    <string name="no_network">Network isn\'t available</string>
 </resources>
