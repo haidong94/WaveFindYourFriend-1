@@ -1,7 +1,13 @@
 package vinsoft.com.wavefindyourfriend.activity;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.Context;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.NotificationCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -32,6 +38,8 @@ import vinsoft.com.wavefindyourfriend.untils.StringFormatUntil;
 
 public class ChatActivity extends AppCompatActivity {
 
+    private static final int MY_NOTIFICATION_ID = 12345;
+
     ImageView imgChatSend;
     EditText edtMessageEdit;
     RecyclerView rlvMessageContainer;
@@ -45,6 +53,8 @@ public class ChatActivity extends AppCompatActivity {
     FirebaseDatabase fireData;
     DatabaseReference dataOffline;
 
+    static boolean isVisiable;
+
 
     String userID;
 
@@ -53,6 +63,8 @@ public class ChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
         initWidget();
+
+        isVisiable = true;
 
         setDatabase();
 
@@ -68,8 +80,21 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onRestart() {
+        super.onRestart();
+        isVisiable = true;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        isVisiable = true;
+    }
+
+    @Override
     protected void onPause() {
         super.onPause();
+        isVisiable = false;
     }
 
     public void initWidget() {
@@ -78,7 +103,7 @@ public class ChatActivity extends AppCompatActivity {
         rlvMessageContainer = (RecyclerView) findViewById(R.id.rlv_messages_container);
         //RelativeLayout container = (RelativeLayout) findViewById(R.id.container);
 
-        linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false);
+        linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         linearLayoutManager.setStackFromEnd(true);
         rlvMessageContainer.setLayoutManager(linearLayoutManager);
 
@@ -95,6 +120,7 @@ public class ChatActivity extends AppCompatActivity {
         imgChatSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                isVisiable = true;
                 String messageText = edtMessageEdit.getText().toString();
                 if (TextUtils.isEmpty(messageText)) {
                     return;
@@ -104,7 +130,7 @@ public class ChatActivity extends AppCompatActivity {
                 DateFormat dateFormat = new SimpleDateFormat(StringFormatUntil.DATE_FORMAT);
                 DateFormat timeFormat = new SimpleDateFormat(StringFormatUntil.DAY_FORMAT);
 
-                if(MethodUntil.isNetworkConnected(ChatActivity.this)) {
+                if (MethodUntil.isNetworkConnected(ChatActivity.this)) {
                     String keyId = msgReference.push().getKey();
                     msg.setMessageID(keyId);
                     msg.setDateSend(dateFormat.format(cal.getTime()));
@@ -113,7 +139,7 @@ public class ChatActivity extends AppCompatActivity {
                     msg.setPersonSendID(sendId);
                     msg.setMessageVision("NULL");
                     msgReference.push().setValue(msg);
-                }else {
+                } else {
                     String keyId = dataOffline.push().getKey();
                     msg.setMessageID(keyId);
                     msg.setDateSend(dateFormat.format(cal.getTime()));
@@ -134,6 +160,19 @@ public class ChatActivity extends AppCompatActivity {
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 ChatMessage message = dataSnapshot.getValue(ChatMessage.class);
                 displayMessage(message);
+                if (!ChatActivity.this.isVisiable) {
+                    NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(ChatActivity.this);
+                    mBuilder.setSmallIcon(R.drawable.ic_msg_notification);
+                    mBuilder.setContentTitle("Wave");
+                    mBuilder.setContentText(message.getContentMessage());
+                    Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                    mBuilder.setSound(alarmSound);
+
+                    NotificationManager notificationService = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+
+                    Notification notification = mBuilder.build();
+                    notificationService.notify(MY_NOTIFICATION_ID, notification);
+                }
             }
 
             @Override
@@ -157,6 +196,7 @@ public class ChatActivity extends AppCompatActivity {
 
             }
         });
+
 
     }
 
@@ -191,13 +231,13 @@ public class ChatActivity extends AppCompatActivity {
         rlvMessageContainer.setAdapter(messageApdapter);
     }
 
-    public void checkNetwork(){
-        if(!MethodUntil.isNetworkConnected(getApplicationContext())){
-            MethodUntil.makeToast(ChatActivity.this,getString(R.string.no_network),1);
+    public void checkNetwork() {
+        if (!MethodUntil.isNetworkConnected(getApplicationContext())) {
+            MethodUntil.makeToast(ChatActivity.this, getString(R.string.no_network), 1);
         }
     }
 
-    public void setDatabase(){
+    public void setDatabase() {
         fireData = FirebaseDatabase.getInstance();
         mData = fireData.getReference();
         msgReference = mData.child(StringFormatUntil.REF_MESSAGE_NAME).child("123");
