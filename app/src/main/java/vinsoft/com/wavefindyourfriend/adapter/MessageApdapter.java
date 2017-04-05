@@ -78,7 +78,7 @@ public class MessageApdapter extends RecyclerView.Adapter<MessageApdapter.ViewHo
         holder.tvMessage.setText(message.getContentMessage());
         holder.tvInfo.setText(message.getTimeSend());
         try {
-            if(!formatter.parse(message.getDateSend()).equals(formatter.parse(listMessage.get(i).getDateSend()))) {
+            /*if(!formatter.parse(message.getDateSend()).equals(formatter.parse(listMessage.get(i).getDateSend()))) {
                 holder.tvDate.setVisibility(View.GONE);
                 //holder.tvDate.setText(message.getDateSend());
                 //dateGroup=formatter.parse(message.getDateSend());
@@ -87,7 +87,26 @@ public class MessageApdapter extends RecyclerView.Adapter<MessageApdapter.ViewHo
             else{
                 holder.tvDate.setVisibility(View.VISIBLE);
                 holder.tvDate.setText(message.getDateSend());
+            }*/
+            if(position!=0){
+                ChatMessage msgAfter = listMessage.get(position-1);
+                if(formatter.parse(message.getDateSend()).equals(formatter.parse(msgAfter.getDateSend()))) {
+                    holder.tvDate.setVisibility(View.GONE);
+                    //holder.tvDate.setText(message.getDateSend());
+                    //dateGroup=formatter.parse(message.getDateSend());
+                    i=position;
+                }
+                else{
+                    holder.tvDate.setVisibility(View.VISIBLE);
+                    holder.tvDate.setText(message.getDateSend());
+                }
             }
+            else {
+                holder.tvDate.setVisibility(View.VISIBLE);
+                holder.tvDate.setText(message.getDateSend());
+            }
+
+
         } catch (ParseException e) {
             e.printStackTrace();
         }

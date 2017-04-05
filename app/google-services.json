@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "418042358383-ge3dla20086mg6ebe6rd8fn7o0n9q3v5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "vinsoft.com.wavefindyourfriend",
+            "certificate_hash": "54a46d7722002b88f9c5d41a6ffebc0493aeea96"
+          }
+        },
+        {
           "client_id": "418042358383-0urmmaskei0c047c4lo087if46vhh9eb.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

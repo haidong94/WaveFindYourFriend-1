@@ -55,8 +55,7 @@ public class ChatActivity extends AppCompatActivity {
 
     static boolean isVisiable;
 
-
-    String userID;
+    String userID, groupId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,11 +64,11 @@ public class ChatActivity extends AppCompatActivity {
         initWidget();
 
         isVisiable = true;
-
-        setDatabase();
-
         chatHistory = new ArrayList<>();
         userID = "ABC";
+        groupId=getIntent().getStringExtra("groupId");
+
+        setDatabase();
 
         checkNetwork();
 
@@ -238,9 +237,40 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     public void setDatabase() {
+        final Object[] ss = {null};
+        final String[] key = {null};
         fireData = FirebaseDatabase.getInstance();
         mData = fireData.getReference();
-        msgReference = mData.child(StringFormatUntil.REF_MESSAGE_NAME).child("123");
-        dataOffline = fireData.getReference(StringFormatUntil.REF_MESSAGE_NAME).child("123");
+      /*  mData.child(StringFormatUntil.REF_GROUP_NAME).child(userID).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                for(DataSnapshot mGroup : dataSnapshot.getChildren()){
+                    ss[0] =mGroup.getValue();
+                    key[0] = mGroup.getKey();
+                }
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });*/
+        msgReference=mData.child(StringFormatUntil.REF_MESSAGE_NAME).child(groupId);
+        dataOffline = fireData.getReference(StringFormatUntil.REF_MESSAGE_NAME).child(groupId);
     }
 }
