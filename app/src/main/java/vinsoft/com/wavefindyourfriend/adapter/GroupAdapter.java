@@ -41,14 +41,14 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.ViewHolder> 
         this.groupList = groupList;
     }
 
-    public void addGroup(Group group){
+    public void addGroup(Group group) {
         groupList.add(group);
         this.notifyDataSetChanged();
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_group_custom,parent,false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_group_custom, parent, false);
 
         return new ViewHolder(itemView);
     }
@@ -57,36 +57,38 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.ViewHolder> 
     public void onBindViewHolder(ViewHolder holder, int position) {
         Group group = groupList.get(position);
 
-        holder.imgGroupAvatar.setImageResource(R.mipmap.ic_launcher_round);
+        holder.imgGroupAvatar.setImageResource(R.drawable.ic_profile);
         holder.tvGroupName.setText(group.getGroupName());
-        holder.tvGroupCreateDate.setText(group.getGroupCreateDate());
+        holder.tvGroupCreateDate.setText(group.getLastMessage());
+
 
     }
 
     @Override
     public int getItemCount() {
-        if (groupList.size()<=0)
+        if (groupList.size() <= 0)
             return 0;
         else return groupList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView tvGroupName;
         private TextView tvGroupCreateDate;
         private ImageView imgGroupAvatar;
+
         public ViewHolder(final View itemView) {
             super(itemView);
 
-            tvGroupCreateDate= (TextView) itemView.findViewById(R.id.tv_group_create_date);
-            tvGroupName= (TextView) itemView.findViewById(R.id.tv_group_name);
-            imgGroupAvatar= (ImageView) itemView.findViewById(R.id.img_conversation_avatar);
+            tvGroupCreateDate = (TextView) itemView.findViewById(R.id.tv_group_create_date);
+            tvGroupName = (TextView) itemView.findViewById(R.id.tv_group_name);
+            imgGroupAvatar = (ImageView) itemView.findViewById(R.id.img_conversation_avatar);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(mContext, ChatActivity.class);
-                    intent.putExtra("groupId",groupList.get(getAdapterPosition()).getGroupId());
+                    intent.putExtra("groupId", groupList.get(getAdapterPosition()).getGroupId());
                     mContext.startActivity(intent);
                 }
             });

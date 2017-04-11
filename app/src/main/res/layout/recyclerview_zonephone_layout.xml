@@ -6,6 +6,8 @@
     android:background="@color/colorPrimary">
 
     <TextView
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
         android:id="@+id/tv_country_name"
         android:paddingLeft="@dimen/txt_size_default"
         android:textColor="@color/balck"

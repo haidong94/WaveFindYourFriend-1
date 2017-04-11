@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="margin_top_default">6dp</dimen>
-    <dimen name="margin_default">16dp</dimen>
+    <dimen name="margin_default">5dp</dimen>
     <dimen name="txt_big">20sp</dimen>
     <dimen name="txt_normal">18sp</dimen>
     <dimen name="txt_size_default">15sp</dimen>
     <dimen name="img_avatar_conversation_default">50dp</dimen>
     <dimen name="img_avatar_conversation_hdpi">50dp</dimen>
     <dimen name="img_avatar_conversation_xhdpi">55dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="txt_size_small">14sp</dimen>
+    <dimen name="edt_size">40dp</dimen>
+    <dimen name="img_avatar_conversation">55dp</dimen>
 </resources>

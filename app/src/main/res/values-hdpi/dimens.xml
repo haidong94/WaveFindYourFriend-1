@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="size_input_layout">50dp</dimen>
+    <dimen name="txt_size_small">13sp</dimen>
+    <dimen name="edt_size">40dp</dimen>
+    <dimen name="img_avatar_conversation">50dp</dimen>
+    <dimen name="margin_default">8dp</dimen>
+
+</resources>

@@ -49,9 +49,9 @@ public class ZonePhoneAdapter extends RecyclerView.Adapter<ZonePhoneAdapter.View
     public void onBindViewHolder(ViewHolder holder, int position) {
         ZonePhone zonePhone = zonePhoneList.get(position);
         if(position%2==0)
-            holder.llItem.setBackgroundColor(Color.parseColor("#0d948d"));
+            holder.llItem.setBackgroundColor(Color.parseColor("#FF34BAB4"));
         else
-            holder.llItem.setBackgroundColor(Color.parseColor("#3fafaa"));
+            holder.llItem.setBackgroundColor(Color.parseColor("#FF3FAFAA"));
         holder.tvCountryName.setText(zonePhone.getCountryName());
     }
 

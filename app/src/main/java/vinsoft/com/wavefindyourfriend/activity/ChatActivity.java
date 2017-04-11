@@ -3,6 +3,7 @@ package vinsoft.com.wavefindyourfriend.activity;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -32,6 +33,7 @@ import java.util.Map;
 import vinsoft.com.wavefindyourfriend.R;
 import vinsoft.com.wavefindyourfriend.adapter.MessageApdapter;
 import vinsoft.com.wavefindyourfriend.model.ChatMessage;
+import vinsoft.com.wavefindyourfriend.model.Group;
 import vinsoft.com.wavefindyourfriend.myinterface.IDeleteMessage;
 import vinsoft.com.wavefindyourfriend.untils.MethodUntil;
 import vinsoft.com.wavefindyourfriend.untils.StringFormatUntil;
@@ -49,13 +51,14 @@ public class ChatActivity extends AppCompatActivity {
     MessageApdapter messageApdapter;
     Calendar cal = Calendar.getInstance();
 
-    DatabaseReference mData, msgReference;
+    DatabaseReference mData, msgReference, groupData;
     FirebaseDatabase fireData;
     DatabaseReference dataOffline;
+    String lastMessage;
 
     static boolean isVisiable;
 
-    String userID, groupId;
+    String userID, groupId,friendId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +68,10 @@ public class ChatActivity extends AppCompatActivity {
 
         isVisiable = true;
         chatHistory = new ArrayList<>();
-        userID = "ABC";
-        groupId=getIntent().getStringExtra("groupId");
+        SharedPreferences preferences = getSharedPreferences(StringFormatUntil.PREFER_ACCOUNT_NAME, MODE_PRIVATE);
+        userID = preferences.getString("phone", "NULL");
+        groupId = getIntent().getStringExtra("groupId");
+        friendId = groupId.replaceAll(userID,"").trim();
 
         setDatabase();
 
@@ -94,6 +99,32 @@ public class ChatActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         isVisiable = false;
+
+        /*groupData.orderByChild("groupId").equalTo(groupId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
+                    Group msg = child.getValue(Group.class);
+
+                    Map<String, Object> msgUpdates = new HashMap<String, Object>();
+                    msgUpdates.put("lastMessage", lastMessage);
+                    groupData.child(child.getKey()).updateChildren(msgUpdates);
+
+                    break;
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });*/
+
+        updateGroup(userID);
+        updateGroup(friendId);
+
     }
 
     public void initWidget() {
@@ -110,6 +141,7 @@ public class ChatActivity extends AppCompatActivity {
 
     public void displayMessage(ChatMessage message) {
         messageApdapter.addMessage(message);
+        lastMessage = message.getContentMessage();
 
         rlvMessageContainer.scrollToPosition(messageApdapter.getItemCount() - 1);
 
@@ -270,7 +302,32 @@ public class ChatActivity extends AppCompatActivity {
 
             }
         });*/
-        msgReference=mData.child(StringFormatUntil.REF_MESSAGE_NAME).child(groupId);
+        msgReference = mData.child(StringFormatUntil.REF_MESSAGE_NAME).child(groupId);
         dataOffline = fireData.getReference(StringFormatUntil.REF_MESSAGE_NAME).child(groupId);
+        groupData = mData.child(StringFormatUntil.REF_GROUP_NAME);
+    }
+
+    public void updateGroup(final String accountId){
+        groupData.child(accountId).orderByChild("groupId").equalTo(groupId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for (DataSnapshot child : dataSnapshot.getChildren()) {
+                    Group msg = child.getValue(Group.class);
+
+                    Map<String, Object> msgUpdates = new HashMap<String, Object>();
+                    msgUpdates.put("lastMessage", lastMessage);
+                    groupData.child(accountId).child(child.getKey()).updateChildren(msgUpdates);
+
+                    break;
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 }

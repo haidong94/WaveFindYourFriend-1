@@ -18,4 +18,9 @@
     <string name="txt_permission_grant">Permisions is Granted</string>
     <string name="txt_permission_deny">Permisions is Denied. Grant it now!</string>
     <string name="no_network">Network isn\'t available</string>
+    <string name="txt_show_pass">Show Password</string>
+    <string name="txt_register"><u>Register</u></string>
+    <string name="txt_empty_phone">Phone not empty</string>
+    <string name="txt_empty_pass">Pass not empty</string>
+    <string name="txt_login_failed">Phone or Passowrd incorret</string>
 </resources>

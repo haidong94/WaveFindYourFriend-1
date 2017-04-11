@@ -17,6 +17,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    aaptOptions
+            {
+                cruncherEnabled = false
+            }
 }
 
 dependencies {
@@ -36,6 +40,9 @@ dependencies {
     compile 'com.google.firebase:firebase-messaging:10.0.1'
     testCompile 'junit:junit:4.12'
 }
+
+
+
 
 
 
